@@ -1,0 +1,48 @@
+{% extends 'commentstoreapp/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">用户积分情况</h3>
+                </div>
+                <div class="card-body">
+                    {% if src_points and dst_points %}
+                    <div class="alert alert-success mb-4">
+                        <h5>转账成功！</h5>
+                        <p>源用户积分：{{ src_points }}</p>
+                        <p>目标用户积分：{{ dst_points }}</p>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>用户名</th>
+                                    <th>当前积分</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for point in all_points %}
+                                <tr>
+                                    <td>{{ point.name.username }}</td>
+                                    <td>{{ point.points }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="d-grid gap-2 mt-3">
+                        <a href="{% url 'pointstransfer' %}" class="btn btn-primary">继续转账</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
